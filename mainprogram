@@ -1,0 +1,62 @@
+//Test Program Queue as Array 
+ 
+#include <iostream>
+#include <string>
+#include <cctype>
+#include "myStack.h"
+#include "queueAsArray.h"
+   
+using namespace std; 
+ 
+int main()
+{
+    queueType<char> queue(200);
+    stackType<char> stack(200);
+
+    string text;
+
+    int len, i;
+
+    char ch;
+
+    bool isPalindrome;
+
+    cout <<"Enter a line of text" << endl;
+
+    getline(cin, text);
+
+    len = text.length();
+
+    i = 0;
+
+    while (i < len)
+    {
+        ch = text[i];
+        stack.push(toupper(ch));
+        queue.addQueue(toupper(ch));
+        i++;
+    }
+
+    isPalindrome = true;
+
+    while (!queue.isEmptyQueue())
+    {
+        if (stack.top() != queue.front())
+        {
+            isPalindrome = false;
+            break;
+        }
+
+        stack.pop();
+        queue.deleteQueue();
+    }
+
+    if (isPalindrome)
+        cout << "The line of text you entered is a palindrome." << endl;
+    else
+        cout << "The line of text you entered is not a palindrome." << endl;
+
+    cout << endl;
+
+    return 0;
+}
